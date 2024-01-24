@@ -18,12 +18,14 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(speed,0,0);
+        
     }
     private void FixedUpdate()
     {
         Vector2 direction = new Vector2(speed * Time.deltaTime, 0);
         rigidbody.MovePosition(rigidbody.position + direction);
+
+        transform.Translate(speed, 0, 0);
     }
 
 
