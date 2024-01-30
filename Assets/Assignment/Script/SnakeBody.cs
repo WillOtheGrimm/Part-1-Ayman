@@ -18,16 +18,11 @@ public class SnakeBody : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void FixedUpdate()
     {
         Vector2 changeInPosition = (transform.position - nextBodyPiece.position).normalized * head.segmentLength;
 
-        rigidbody.MovePosition((Vector2)nextBodyPiece.position + changeInPosition);
+        rigidbody.MovePosition((Vector2)nextBodyPiece.position + changeInPosition );
 
 
 

@@ -8,7 +8,6 @@ public class SnakeHead : MonoBehaviour
     Rigidbody2D rigidbody;
 
 
-    float acceleration;
     float turnInput;
     public float movingSpeed = 200;
     public float turningSpeed = 300;
@@ -17,20 +16,16 @@ public class SnakeHead : MonoBehaviour
     List<SnakeBody> bodySegments = new();
     public SnakeBody bodyPrefab;
     public float maxHeadAngle = 90;
-
-
+    public GameObject gameOver;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOver.SetActive(false);
         rigidbody = GetComponent<Rigidbody2D>();
-        AddBody();
-        AddBody();
-        AddBody();
-        AddBody();
-        AddBody();
+
     }
 
     // Update is called once per frame
@@ -38,6 +33,7 @@ public class SnakeHead : MonoBehaviour
     {
 
         turnInput = Input.GetAxis("Horizontal");
+
 
     }
 
@@ -55,6 +51,11 @@ public class SnakeHead : MonoBehaviour
                 rigidbody.AddTorque(turnInput * -turningSpeed * Time.deltaTime);
             }
         }
+        else
+        {
+            rigidbody.AddTorque(turnInput * -turningSpeed * Time.deltaTime);
+
+        }
 
 
 
@@ -67,7 +68,7 @@ public class SnakeHead : MonoBehaviour
 
     }
 
-    private void AddBody()
+    public void AddBody()
     {
 
         SnakeBody newSegment = Instantiate(bodyPrefab);
@@ -86,6 +87,14 @@ public class SnakeHead : MonoBehaviour
 
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        gameOver.SetActive(true);
+        Time.timeScale = 0;
+        Debug.Log("No restart function yet, please restart game.");
+    }
 
 }
 
